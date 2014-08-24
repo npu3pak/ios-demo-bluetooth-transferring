@@ -1,5 +1,5 @@
 //
-//  SecondViewController.h
+//  ReceiveTableViewController.h
 //  BluetoothPrototype
 //
 //  Created by Евгений Сафронов on 24.08.14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondViewController : UIViewController
+@interface ReceiveTableViewController : UITableViewController
 
 @end

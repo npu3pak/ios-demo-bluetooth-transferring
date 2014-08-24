@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  SendTableViewController.h
 //  BluetoothPrototype
 //
 //  Created by Евгений Сафронов on 24.08.14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
+@interface SendTableViewController : UITableViewController
 
 @end

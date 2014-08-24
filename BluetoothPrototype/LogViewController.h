@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  LogViewController.h
 //  BluetoothPrototype
 //
 //  Created by Евгений Сафронов on 24.08.14.
@@ -8,12 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class Log;
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
-
-@property Log *log;
+@interface LogViewController : UIViewController
 
 @end

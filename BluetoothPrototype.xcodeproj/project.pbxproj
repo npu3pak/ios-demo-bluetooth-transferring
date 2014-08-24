@@ -14,14 +14,16 @@
 		40F1ABA119A991A600BAB441 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABA019A991A600BAB441 /* main.m */; };
 		40F1ABA519A991A600BAB441 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABA419A991A600BAB441 /* AppDelegate.m */; };
 		40F1ABA819A991A600BAB441 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40F1ABA619A991A600BAB441 /* Main.storyboard */; };
-		40F1ABAB19A991A600BAB441 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABAA19A991A600BAB441 /* FirstViewController.m */; };
-		40F1ABAE19A991A600BAB441 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABAD19A991A600BAB441 /* SecondViewController.m */; };
-		40F1ABB019A991A600BAB441 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40F1ABAF19A991A600BAB441 /* Images.xcassets */; };
 		40F1ABB719A991A600BAB441 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F1ABB619A991A600BAB441 /* XCTest.framework */; };
 		40F1ABB819A991A600BAB441 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F1AB9419A991A600BAB441 /* Foundation.framework */; };
 		40F1ABB919A991A600BAB441 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F1AB9819A991A600BAB441 /* UIKit.framework */; };
 		40F1ABC119A991A600BAB441 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 40F1ABBF19A991A600BAB441 /* InfoPlist.strings */; };
 		40F1ABC319A991A600BAB441 /* BluetoothPrototypeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABC219A991A600BAB441 /* BluetoothPrototypeTests.m */; };
+		40F1ABD619A993D800BAB441 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40F1ABD519A993D800BAB441 /* Images.xcassets */; };
+		40F1ABD919A998E900BAB441 /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABD819A998E900BAB441 /* LogViewController.m */; };
+		40F1ABDC19A9990B00BAB441 /* SendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABDB19A9990B00BAB441 /* SendTableViewController.m */; };
+		40F1ABDF19A9991800BAB441 /* ReceiveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABDE19A9991800BAB441 /* ReceiveTableViewController.m */; };
+		40F1ABE319A999E400BAB441 /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABE219A999E400BAB441 /* Log.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,16 +48,20 @@
 		40F1ABA319A991A600BAB441 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		40F1ABA419A991A600BAB441 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		40F1ABA719A991A600BAB441 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		40F1ABA919A991A600BAB441 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		40F1ABAA19A991A600BAB441 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		40F1ABAC19A991A600BAB441 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		40F1ABAD19A991A600BAB441 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
-		40F1ABAF19A991A600BAB441 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		40F1ABB519A991A600BAB441 /* BluetoothPrototypeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BluetoothPrototypeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40F1ABB619A991A600BAB441 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		40F1ABBE19A991A600BAB441 /* BluetoothPrototypeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BluetoothPrototypeTests-Info.plist"; sourceTree = "<group>"; };
 		40F1ABC019A991A600BAB441 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		40F1ABC219A991A600BAB441 /* BluetoothPrototypeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BluetoothPrototypeTests.m; sourceTree = "<group>"; };
+		40F1ABD519A993D800BAB441 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BluetoothPrototype/Images.xcassets; sourceTree = "<group>"; };
+		40F1ABD719A998E900BAB441 /* LogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
+		40F1ABD819A998E900BAB441 /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
+		40F1ABDA19A9990B00BAB441 /* SendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendTableViewController.h; sourceTree = "<group>"; };
+		40F1ABDB19A9990B00BAB441 /* SendTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendTableViewController.m; sourceTree = "<group>"; };
+		40F1ABDD19A9991800BAB441 /* ReceiveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiveTableViewController.h; sourceTree = "<group>"; };
+		40F1ABDE19A9991800BAB441 /* ReceiveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveTableViewController.m; sourceTree = "<group>"; };
+		40F1ABE119A999E400BAB441 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
+		40F1ABE219A999E400BAB441 /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +91,7 @@
 		40F1AB8819A991A600BAB441 = {
 			isa = PBXGroup;
 			children = (
+				40F1ABD519A993D800BAB441 /* Images.xcassets */,
 				40F1AB9A19A991A600BAB441 /* BluetoothPrototype */,
 				40F1ABBC19A991A600BAB441 /* BluetoothPrototypeTests */,
 				40F1AB9319A991A600BAB441 /* Frameworks */,
@@ -115,14 +122,10 @@
 		40F1AB9A19A991A600BAB441 /* BluetoothPrototype */ = {
 			isa = PBXGroup;
 			children = (
-				40F1ABA319A991A600BAB441 /* AppDelegate.h */,
-				40F1ABA419A991A600BAB441 /* AppDelegate.m */,
-				40F1ABA619A991A600BAB441 /* Main.storyboard */,
-				40F1ABA919A991A600BAB441 /* FirstViewController.h */,
-				40F1ABAA19A991A600BAB441 /* FirstViewController.m */,
-				40F1ABAC19A991A600BAB441 /* SecondViewController.h */,
-				40F1ABAD19A991A600BAB441 /* SecondViewController.m */,
-				40F1ABAF19A991A600BAB441 /* Images.xcassets */,
+				40F1ABE019A999D100BAB441 /* Util */,
+				40F1ABCE19A991C700BAB441 /* Res */,
+				40F1ABCD19A991C000BAB441 /* App */,
+				40F1ABCC19A991B900BAB441 /* UI */,
 				40F1AB9B19A991A600BAB441 /* Supporting Files */,
 			);
 			path = BluetoothPrototype;
@@ -155,6 +158,45 @@
 				40F1ABBF19A991A600BAB441 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		40F1ABCC19A991B900BAB441 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				40F1ABD719A998E900BAB441 /* LogViewController.h */,
+				40F1ABD819A998E900BAB441 /* LogViewController.m */,
+				40F1ABDA19A9990B00BAB441 /* SendTableViewController.h */,
+				40F1ABDB19A9990B00BAB441 /* SendTableViewController.m */,
+				40F1ABDD19A9991800BAB441 /* ReceiveTableViewController.h */,
+				40F1ABDE19A9991800BAB441 /* ReceiveTableViewController.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		40F1ABCD19A991C000BAB441 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				40F1ABA319A991A600BAB441 /* AppDelegate.h */,
+				40F1ABA419A991A600BAB441 /* AppDelegate.m */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+		40F1ABCE19A991C700BAB441 /* Res */ = {
+			isa = PBXGroup;
+			children = (
+				40F1ABA619A991A600BAB441 /* Main.storyboard */,
+			);
+			name = Res;
+			sourceTree = "<group>";
+		};
+		40F1ABE019A999D100BAB441 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				40F1ABE119A999E400BAB441 /* Log.h */,
+				40F1ABE219A999E400BAB441 /* Log.m */,
+			);
+			name = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,8 +275,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40F1ABB019A991A600BAB441 /* Images.xcassets in Resources */,
 				40F1AB9F19A991A600BAB441 /* InfoPlist.strings in Resources */,
+				40F1ABD619A993D800BAB441 /* Images.xcassets in Resources */,
 				40F1ABA819A991A600BAB441 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,10 +296,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40F1ABAE19A991A600BAB441 /* SecondViewController.m in Sources */,
+				40F1ABE319A999E400BAB441 /* Log.m in Sources */,
+				40F1ABDF19A9991800BAB441 /* ReceiveTableViewController.m in Sources */,
 				40F1ABA519A991A600BAB441 /* AppDelegate.m in Sources */,
-				40F1ABAB19A991A600BAB441 /* FirstViewController.m in Sources */,
+				40F1ABDC19A9990B00BAB441 /* SendTableViewController.m in Sources */,
 				40F1ABA119A991A600BAB441 /* main.m in Sources */,
+				40F1ABD919A998E900BAB441 /* LogViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,11 +425,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BluetoothPrototype/BluetoothPrototype-Prefix.pch";
 				INFOPLIST_FILE = "BluetoothPrototype/BluetoothPrototype-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -394,11 +438,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BluetoothPrototype/BluetoothPrototype-Prefix.pch";
 				INFOPLIST_FILE = "BluetoothPrototype/BluetoothPrototype-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
