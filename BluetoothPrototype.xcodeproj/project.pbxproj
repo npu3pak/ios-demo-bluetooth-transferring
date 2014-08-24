@@ -53,7 +53,7 @@
 		40F1ABBE19A991A600BAB441 /* BluetoothPrototypeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BluetoothPrototypeTests-Info.plist"; sourceTree = "<group>"; };
 		40F1ABC019A991A600BAB441 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		40F1ABC219A991A600BAB441 /* BluetoothPrototypeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BluetoothPrototypeTests.m; sourceTree = "<group>"; };
-		40F1ABD519A993D800BAB441 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BluetoothPrototype/Images.xcassets; sourceTree = "<group>"; };
+		40F1ABD519A993D800BAB441 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		40F1ABD719A998E900BAB441 /* LogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
 		40F1ABD819A998E900BAB441 /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
 		40F1ABDA19A9990B00BAB441 /* SendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendTableViewController.h; sourceTree = "<group>"; };
@@ -91,7 +91,6 @@
 		40F1AB8819A991A600BAB441 = {
 			isa = PBXGroup;
 			children = (
-				40F1ABD519A993D800BAB441 /* Images.xcassets */,
 				40F1AB9A19A991A600BAB441 /* BluetoothPrototype */,
 				40F1ABBC19A991A600BAB441 /* BluetoothPrototypeTests */,
 				40F1AB9319A991A600BAB441 /* Frameworks */,
@@ -185,6 +184,7 @@
 		40F1ABCE19A991C700BAB441 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				40F1ABD519A993D800BAB441 /* Images.xcassets */,
 				40F1ABA619A991A600BAB441 /* Main.storyboard */,
 			);
 			name = Res;
@@ -246,6 +246,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Евгений Сафронов";
 				TargetAttributes = {
+					40F1AB9019A991A600BAB441 = {
+						DevelopmentTeam = C8EH56CX24;
+					};
 					40F1ABB419A991A600BAB441 = {
 						TestTargetID = 40F1AB9019A991A600BAB441;
 					};
@@ -425,6 +428,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BluetoothPrototype/BluetoothPrototype-Prefix.pch";
 				INFOPLIST_FILE = "BluetoothPrototype/BluetoothPrototype-Info.plist";
@@ -438,6 +442,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BluetoothPrototype/BluetoothPrototype-Prefix.pch";
 				INFOPLIST_FILE = "BluetoothPrototype/BluetoothPrototype-Info.plist";
@@ -506,6 +511,7 @@
 				40F1ABC819A991A600BAB441 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		40F1ABC919A991A600BAB441 /* Build configuration list for PBXNativeTarget "BluetoothPrototypeTests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +520,7 @@
 				40F1ABCB19A991A600BAB441 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
