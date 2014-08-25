@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SendTableViewController : UITableViewController
+@interface SendTableViewController : UITableViewController <UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @end

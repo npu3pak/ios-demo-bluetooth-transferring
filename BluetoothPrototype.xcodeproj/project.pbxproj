@@ -24,6 +24,7 @@
 		40F1ABDC19A9990B00BAB441 /* SendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABDB19A9990B00BAB441 /* SendTableViewController.m */; };
 		40F1ABDF19A9991800BAB441 /* ReceiveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABDE19A9991800BAB441 /* ReceiveTableViewController.m */; };
 		40F1ABE319A999E400BAB441 /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABE219A999E400BAB441 /* Log.m */; };
+		8095DB24DF22B534DC948D1B /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8095D2B86809C2055C145729 /* Settings.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		40F1ABDE19A9991800BAB441 /* ReceiveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveTableViewController.m; sourceTree = "<group>"; };
 		40F1ABE119A999E400BAB441 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		40F1ABE219A999E400BAB441 /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
+		8095D2B86809C2055C145729 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		8095D6BBECA81F636995DF1A /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +198,8 @@
 			children = (
 				40F1ABE119A999E400BAB441 /* Log.h */,
 				40F1ABE219A999E400BAB441 /* Log.m */,
+				8095D2B86809C2055C145729 /* Settings.m */,
+				8095D6BBECA81F636995DF1A /* Settings.h */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -305,6 +310,7 @@
 				40F1ABDC19A9990B00BAB441 /* SendTableViewController.m in Sources */,
 				40F1ABA119A991A600BAB441 /* main.m in Sources */,
 				40F1ABD919A998E900BAB441 /* LogViewController.m in Sources */,
+				8095DB24DF22B534DC948D1B /* Settings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
