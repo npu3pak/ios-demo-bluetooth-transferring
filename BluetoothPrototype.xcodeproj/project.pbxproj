@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40EFCEF819AE428600B7A5B6 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40EFCEF719AE428600B7A5B6 /* CoreBluetooth.framework */; };
 		40F1AB9519A991A600BAB441 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F1AB9419A991A600BAB441 /* Foundation.framework */; };
 		40F1AB9719A991A600BAB441 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F1AB9619A991A600BAB441 /* CoreGraphics.framework */; };
 		40F1AB9919A991A600BAB441 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F1AB9819A991A600BAB441 /* UIKit.framework */; };
@@ -24,6 +25,7 @@
 		40F1ABDC19A9990B00BAB441 /* SendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABDB19A9990B00BAB441 /* SendTableViewController.m */; };
 		40F1ABDF19A9991800BAB441 /* ReceiveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABDE19A9991800BAB441 /* ReceiveTableViewController.m */; };
 		40F1ABE319A999E400BAB441 /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABE219A999E400BAB441 /* Log.m */; };
+		8095DA62305B75296E4A5FA1 /* BluetoothCentral.m in Sources */ = {isa = PBXBuildFile; fileRef = 8095D9D78613D507D1C954FF /* BluetoothCentral.m */; };
 		8095DB24DF22B534DC948D1B /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8095D2B86809C2055C145729 /* Settings.m */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		40EFCEF719AE428600B7A5B6 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		40F1AB9119A991A600BAB441 /* BluetoothPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluetoothPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40F1AB9419A991A600BAB441 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		40F1AB9619A991A600BAB441 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -64,7 +67,10 @@
 		40F1ABE119A999E400BAB441 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		40F1ABE219A999E400BAB441 /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
 		8095D2B86809C2055C145729 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		8095D4A6E84EDC5B82784F9F /* BluetoothCentral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothCentral.h; sourceTree = "<group>"; };
 		8095D6BBECA81F636995DF1A /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		8095D910EFBBC03F49B25AF1 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		8095D9D78613D507D1C954FF /* BluetoothCentral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothCentral.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40EFCEF819AE428600B7A5B6 /* CoreBluetooth.framework in Frameworks */,
 				40F1AB9719A991A600BAB441 /* CoreGraphics.framework in Frameworks */,
 				40F1AB9919A991A600BAB441 /* UIKit.framework in Frameworks */,
 				40F1AB9519A991A600BAB441 /* Foundation.framework in Frameworks */,
@@ -113,6 +120,7 @@
 		40F1AB9319A991A600BAB441 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				40EFCEF719AE428600B7A5B6 /* CoreBluetooth.framework */,
 				40F1AB9419A991A600BAB441 /* Foundation.framework */,
 				40F1AB9619A991A600BAB441 /* CoreGraphics.framework */,
 				40F1AB9819A991A600BAB441 /* UIKit.framework */,
@@ -129,6 +137,7 @@
 				40F1ABCD19A991C000BAB441 /* App */,
 				40F1ABCC19A991B900BAB441 /* UI */,
 				40F1AB9B19A991A600BAB441 /* Supporting Files */,
+				8095DA9DE1B2FA14ACC29195 /* Bluetooth */,
 			);
 			path = BluetoothPrototype;
 			sourceTree = "<group>";
@@ -200,8 +209,18 @@
 				40F1ABE219A999E400BAB441 /* Log.m */,
 				8095D2B86809C2055C145729 /* Settings.m */,
 				8095D6BBECA81F636995DF1A /* Settings.h */,
+				8095D910EFBBC03F49B25AF1 /* Constants.h */,
 			);
 			name = Util;
+			sourceTree = "<group>";
+		};
+		8095DA9DE1B2FA14ACC29195 /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				8095D9D78613D507D1C954FF /* BluetoothCentral.m */,
+				8095D4A6E84EDC5B82784F9F /* BluetoothCentral.h */,
+			);
+			name = Bluetooth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,6 +330,7 @@
 				40F1ABA119A991A600BAB441 /* main.m in Sources */,
 				40F1ABD919A998E900BAB441 /* LogViewController.m in Sources */,
 				8095DB24DF22B534DC948D1B /* Settings.m in Sources */,
+				8095DA62305B75296E4A5FA1 /* BluetoothCentral.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
