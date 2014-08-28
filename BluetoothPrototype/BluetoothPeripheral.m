@@ -47,6 +47,10 @@
 }
 
 - (void)setUp {
+    if (_peripheralManager.state != CBPeripheralManagerStatePoweredOn) {
+        [Log error:@"Bluetooth недоступен. Отправка данных отменена"];
+        return;
+    }
     [Log message:@"Загрузка данных и инициализация характеристик сервиса"];
     NSData *messageData = [[Settings testMessage] dataUsingEncoding:NSUTF8StringEncoding];
     CBMutableCharacteristic *messageCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:kAppCharacteristicMessage]
@@ -85,6 +89,10 @@
 }
 
 - (void)shutDown {
+    if (_peripheralManager.state != CBPeripheralManagerStatePoweredOn) {
+        [Log error:@"Bluetooth недоступен. Нечего отменять. Отправка данных и так не выполнялась"];
+        return;
+    }
     [_peripheralManager stopAdvertising];
 }
 

@@ -57,6 +57,10 @@
 }
 
 - (void)stopScanForDevices {
+    if (_centralManager.state != CBCentralManagerStatePoweredOn) {
+        [Log error:@"Bluetooth недоступен. Нечего отменять"];
+        return;
+    }
     [_centralManager stopScan];
     [Log message:@"Сканирование устройств прекращено"];
 }
@@ -111,6 +115,9 @@
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    if (error) {
+        [Log error:[NSString stringWithFormat:@"Ошибка получение значения характеристики: %@", error.localizedDescription]];
+    }
     NSData *data = characteristic.value;
     [Log success:[NSString stringWithFormat:@"Получено значение характеристики %@. Размер %d кб", characteristic.UUID.UUIDString, (int) (data.length / 1024)]];
 }
