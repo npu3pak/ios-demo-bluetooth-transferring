@@ -41,11 +41,12 @@
 }
 
 + (void)writeMessage:(NSString *)message color:(UIColor *)color {
-    NSString *record = [NSString stringWithFormat:@"%@\n%@\n\n",[self timeStamp], message];
+    NSString *record = [NSString stringWithFormat:@"%@\n%@\n\n", [self timeStamp], message];
     NSMutableAttributedString *attributedRecord = [[NSMutableAttributedString alloc] initWithString:record];
     [attributedRecord addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, attributedRecord.length)];
 
-    [self.instance.log appendAttributedString:attributedRecord];
+    [attributedRecord appendAttributedString:self.instance.log];
+    self.instance.log = attributedRecord;
 }
 
 + (NSString *)timeStamp {

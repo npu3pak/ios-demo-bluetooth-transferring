@@ -276,7 +276,7 @@
 				ORGANIZATIONNAME = "Евгений Сафронов";
 				TargetAttributes = {
 					40F1AB9019A991A600BAB441 = {
-						DevelopmentTeam = AF3F24TXQ2;
+						DevelopmentTeam = C8EH56CX24;
 					};
 					40F1ABB419A991A600BAB441 = {
 						TestTargetID = 40F1AB9019A991A600BAB441;
