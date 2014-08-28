@@ -25,22 +25,22 @@
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
     switch (central.state) {
         case CBCentralManagerStateUnknown:
-            [Log error:@"Не удалось определить статус Bluetooth"];
+            [Log error:@"CentralManager: Не удалось определить статус Bluetooth"];
             break;
         case CBCentralManagerStateResetting:
-            [Log error:@"Связь с сервисом Bluetooth была потеряна"];
+            [Log error:@"CentralManager: Связь с сервисом Bluetooth была потеряна"];
             break;
         case CBCentralManagerStateUnsupported:
-            [Log error:@"Нужная версия Bluetooth не поддерживается"];
+            [Log error:@"CentralManager: Нужная версия Bluetooth не поддерживается"];
             break;
         case CBCentralManagerStateUnauthorized:
-            [Log error:@"Приложению было отказано в доступе к Bluetooth"];
+            [Log error:@"CentralManager: Приложению было отказано в доступе к Bluetooth"];
             break;
         case CBCentralManagerStatePoweredOff:
-            [Log error:@"Bluetooth выключен"];
+            [Log error:@"CentralManager: Bluetooth выключен"];
             break;
         case CBCentralManagerStatePoweredOn:
-            [Log success:@"Bluetooth включен и готов к использованию"];
+            [Log success:@"CentralManager: Bluetooth включен и готов к использованию"];
             break;
     }
 }

@@ -7,5 +7,8 @@
 
 
 @interface BluetoothCentral : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate>
+
 - (void)startScanForDevices;
+
+- (void)stopScanForDevices;
 @end

@@ -10,7 +10,6 @@
 #import "Settings.h"
 
 @interface SendTableViewController ()
-@property(weak, nonatomic) IBOutlet UISwitch *sendingEnabledSwitch;
 @property(weak, nonatomic) IBOutlet UITextField *messageTextField;
 @property(weak, nonatomic) IBOutlet UIImageView *testImageView;
 @property(weak, nonatomic) IBOutlet UILabel *testImageSizeLabel;
@@ -35,8 +34,6 @@
 
     NSString *sizeInKilobytes = @([Settings testImageSize] / 1024).stringValue;
     self.testImageSizeLabel.text = [NSString stringWithFormat:@"%@ Kb", sizeInKilobytes];
-
-    self.sendingEnabledSwitch.on = [Settings sendingEnabled];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -48,17 +45,13 @@
     [self.messageTextField resignFirstResponder];
 }
 
-- (IBAction)changedStateOfSwitch:(UISwitch *)sender {
-    [Settings setSendingEnabled:sender.on];
-}
-
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     [Settings setTestMessage:textField.text];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 1 && indexPath.row == 1) {
+    if (indexPath.section == 1) {
         [self selectImage];
     }
 }
