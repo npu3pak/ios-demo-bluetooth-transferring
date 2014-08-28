@@ -13,7 +13,8 @@ static NSString *const kUserDefaultsKeyIsSendingEnabled = @"SendingEnabled";
 @implementation Settings
 
 + (UIImage *)testImage {
-    return [UIImage imageWithContentsOfFile:self.testImagePath];
+    UIImage *image = [UIImage imageWithContentsOfFile:self.testImagePath];
+    return image ? image : [UIImage imageNamed:@"HelloWorld.jpg"];
 }
 
 + (void)setTestImage:(UIImage *)image {
@@ -34,12 +35,17 @@ static NSString *const kUserDefaultsKeyIsSendingEnabled = @"SendingEnabled";
 
 + (NSUInteger)testImageSize {
     NSData *data = [NSData dataWithContentsOfFile:[self testImagePath]];
-    return data.length;
+    return data.length ? data.length : self.defaultTestImageSize;
+}
+
++ (NSUInteger)defaultTestImageSize {
+    return UIImageJPEGRepresentation([self testImage], 1.0).length;
 }
 
 + (NSString *)testMessage {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    return [userDefaults stringForKey:kUserDefaultsKeyMessage];
+    NSString *testMessage = [userDefaults stringForKey:kUserDefaultsKeyMessage];
+    return testMessage ? testMessage : @"Привет!";
 }
 
 + (void)setTestMessage:(NSString *)message {

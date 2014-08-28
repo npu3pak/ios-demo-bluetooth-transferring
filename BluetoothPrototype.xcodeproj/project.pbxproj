@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		148FA0A26B4DF4D7EE0D25D9 /* BluetoothPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 148FAC2421E06DE6A050B491 /* BluetoothPeripheral.m */; };
+		402CB3EB19AF7394004D1C6A /* HelloWorld.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 402CB3EA19AF7394004D1C6A /* HelloWorld.jpg */; };
 		40EFCEF819AE428600B7A5B6 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40EFCEF719AE428600B7A5B6 /* CoreBluetooth.framework */; };
 		40F1AB9519A991A600BAB441 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F1AB9419A991A600BAB441 /* Foundation.framework */; };
 		40F1AB9719A991A600BAB441 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F1AB9619A991A600BAB441 /* CoreGraphics.framework */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		148FA48A67C05150761C9DC9 /* BluetoothPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothPeripheral.h; sourceTree = "<group>"; };
 		148FAC2421E06DE6A050B491 /* BluetoothPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothPeripheral.m; sourceTree = "<group>"; };
+		402CB3EA19AF7394004D1C6A /* HelloWorld.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = HelloWorld.jpg; path = ../../../../Downloads/HelloWorld.jpg; sourceTree = "<group>"; };
 		40EFCEF719AE428600B7A5B6 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		40F1AB9119A991A600BAB441 /* BluetoothPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluetoothPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40F1AB9419A991A600BAB441 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -199,6 +201,7 @@
 		40F1ABCE19A991C700BAB441 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				402CB3EA19AF7394004D1C6A /* HelloWorld.jpg */,
 				40F1ABD519A993D800BAB441 /* Images.xcassets */,
 				40F1ABA619A991A600BAB441 /* Main.storyboard */,
 			);
@@ -308,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40F1AB9F19A991A600BAB441 /* InfoPlist.strings in Resources */,
+				402CB3EB19AF7394004D1C6A /* HelloWorld.jpg in Resources */,
 				40F1ABD619A993D800BAB441 /* Images.xcassets in Resources */,
 				40F1ABA819A991A600BAB441 /* Main.storyboard in Resources */,
 			);

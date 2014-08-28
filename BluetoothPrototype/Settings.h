@@ -21,4 +21,6 @@
 + (BOOL)sendingEnabled;
 
 + (void)setSendingEnabled:(BOOL)sendingEnabled;
+
++ (NSUInteger)defaultTestImageSize;
 @end
