@@ -1,22 +1,22 @@
 //
-//  SendTableViewController.m
+//  SettingsTableViewController.m
 //  BluetoothPrototype
 //
 //  Created by Евгений Сафронов on 24.08.14.
 //  Copyright (c) 2014 Евгений Сафронов. All rights reserved.
 //
 
-#import "SendTableViewController.h"
+#import "SettingsTableViewController.h"
 #import "Settings.h"
 
-@interface SendTableViewController ()
+@interface SettingsTableViewController ()
 @property(weak, nonatomic) IBOutlet UITextField *messageTextField;
 @property(weak, nonatomic) IBOutlet UIImageView *testImageView;
 @property(weak, nonatomic) IBOutlet UILabel *testImageSizeLabel;
 
 @end
 
-@implementation SendTableViewController
+@implementation SettingsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -17,6 +17,12 @@
 
 @implementation LogViewController
 
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    Log.instance.onLogChangedCallback = @selector(refreshLog);
+    Log.instance.logChangesListener = self;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self refreshLog];

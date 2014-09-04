@@ -1,5 +1,5 @@
 //
-//  SendTableViewController.h
+//  SettingsTableViewController.h
 //  BluetoothPrototype
 //
 //  Created by Евгений Сафронов on 24.08.14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SendTableViewController : UITableViewController <UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface SettingsTableViewController : UITableViewController <UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @end

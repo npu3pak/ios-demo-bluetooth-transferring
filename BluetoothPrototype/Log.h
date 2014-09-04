@@ -22,4 +22,9 @@
 
 + (NSAttributedString *)log;
 
++ (Log *)instance;
+
+@property SEL onLogChangedCallback;
+@property id logChangesListener;
+
 @end

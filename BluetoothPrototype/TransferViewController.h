@@ -1,5 +1,5 @@
 //
-//  ReceiveViewController.h
+//  TransferViewController.h
 //  BluetoothPrototype
 //
 //  Created by Евгений Сафронов on 28.08.14.
@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ReceiveViewController : UIViewController
+@interface TransferViewController : UIViewController
+
 
 @end

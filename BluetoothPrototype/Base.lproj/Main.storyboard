@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -25,16 +25,16 @@
             </objects>
             <point key="canvasLocation" x="268" y="271"/>
         </scene>
-        <!--Send Table View Controller - Настройки-->
+        <!--Settings Table View Controller - Настройки-->
         <scene sceneID="a4W-9D-BrC">
             <objects>
-                <tableViewController id="6SN-lP-NmM" customClass="SendTableViewController" sceneMemberID="viewController">
+                <tableViewController id="6SN-lP-NmM" customClass="SettingsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="XcE-Nd-2g2">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Тестовое сообщение" id="1eu-la-tvF">
+                            <tableViewSection headerTitle="Сообщение" id="1eu-la-tvF">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Vih-NL-dJ1">
                                         <rect key="frame" x="0.0" y="119" width="320" height="44"/>
@@ -54,7 +54,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Тестовая картинка" id="MKW-Hy-XSZ">
+                            <tableViewSection headerTitle="Картинка" id="MKW-Hy-XSZ">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="80" id="njF-p4-pEs">
                                         <rect key="frame" x="0.0" y="211" width="320" height="80"/>
@@ -136,11 +136,11 @@
                         <viewControllerLayoutGuide type="bottom" id="7re-Zj-D4B"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="IDR-xJ-By7">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBk-ga-bHJ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -207,28 +207,18 @@
             </objects>
             <point key="canvasLocation" x="1167" y="-693"/>
         </scene>
-        <!--Receive View Controller - Передача-->
+        <!--Transfer View Controller - Передача-->
         <scene sceneID="he9-vh-1vr">
             <objects>
-                <viewController id="n56-4I-M1H" customClass="ReceiveViewController" sceneMemberID="viewController">
+                <viewController id="n56-4I-M1H" customClass="TransferViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="x1d-PF-nLU"/>
                         <viewControllerLayoutGuide type="bottom" id="74z-b5-9Yx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pjy-DS-lM3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rfB-nv-n0F">
-                                <rect key="frame" x="57" y="100" width="206" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Разрешить отправку данных">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="startSharing:" destination="n56-4I-M1H" eventType="touchUpInside" id="5TQ-nE-iHa"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="drP-K0-jOU">
                                 <rect key="frame" x="97" y="286" width="126" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -237,16 +227,6 @@
                                 </state>
                                 <connections>
                                     <action selector="startScan:" destination="n56-4I-M1H" eventType="touchUpInside" id="Cbe-tK-l2i"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WaF-OZ-FMU">
-                                <rect key="frame" x="62" y="158" width="197" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Отменить отправку данных">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="stopSharing:" destination="n56-4I-M1H" eventType="touchUpInside" id="6WQ-WQ-niu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Bc-5P-sVu">
@@ -259,10 +239,29 @@
                                     <action selector="stopScan:" destination="n56-4I-M1H" eventType="touchUpInside" id="ikA-jk-h1d"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hjT-8O-etq">
+                                <rect key="frame" x="251" y="95" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.80614237882653061" green="0.80614237882653061" blue="0.80614237882653061" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="peripheralSwitchStateChanged:" destination="n56-4I-M1H" eventType="valueChanged" id="UZZ-Y7-MQh"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Отправка данных" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="47R-p7-aDa">
+                                <rect key="frame" x="20" y="100" width="172" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.3469587053571429" green="0.3469587053571429" blue="0.3469587053571429" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Передача" id="r5G-1Q-QeC"/>
+                    <connections>
+                        <outlet property="peripheralStateSwitch" destination="hjT-8O-etq" id="Csa-wh-XHd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cix-vn-Izm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -277,6 +276,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>

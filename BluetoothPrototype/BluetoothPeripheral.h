@@ -7,6 +7,7 @@
 
 
 @interface BluetoothPeripheral : NSObject <CBPeripheralManagerDelegate>
+- (instancetype)initWithSender:(id)sender peripheralStartedCallback:(SEL)peripheralStartedCallback peripheralStoppedCallback:(SEL)peripheralStoppedCallback;
 
 - (void)setUp;
 
