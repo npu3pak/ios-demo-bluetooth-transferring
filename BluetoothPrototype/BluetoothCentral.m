@@ -147,7 +147,6 @@
         [peripheral setNotifyValue:NO forCharacteristic:characteristic];
         [_centralManager cancelPeripheralConnection:peripheral];
     }
-    [Log message:@"получен фрагмент данных"];
     NSData *chunk = characteristic.value;
     [_imageData appendData:chunk];
 }

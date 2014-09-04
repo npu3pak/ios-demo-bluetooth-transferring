@@ -179,10 +179,8 @@
 
         // If it didn't work, drop out and wait for the callback
         if (!didSend) {
-            [Log error:@"Не удалось отправить порцию данных"];
             return;
         }
-
 
         // It did send, so update our index
         _sendDataIndex += amountToSend;
