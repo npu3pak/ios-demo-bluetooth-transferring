@@ -18,7 +18,8 @@
 
 @end
 
-#define NOTIFY_MTU 120
+//TODO В настройки
+#define MTU 120
 
 @implementation BluetoothPeripheral {
     NSData *_imageData;
@@ -84,8 +85,8 @@
         [Log error:@"Bluetooth недоступен. Нечего отменять. Отправка данных и так не выполнялась"];
         return;
     }
-    [Log success:@"Раздача данных отключена. Устройство больше не доступно для обнаружения"];
     [self.peripheralManager stopAdvertising];
+    [Log success:@"Раздача данных отключена. Устройство больше не доступно для обнаружения"];
 }
 
 - (void)setUp {
@@ -105,16 +106,20 @@
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didAddService:(CBService *)service error:(NSError *)error {
-    if (error)
+    if (error) {
+        [self notifyPeripheralStop];
         [Log error:[NSString stringWithFormat:@"Не удалось зарегистрировать сервис: %@", error.localizedDescription]];
+    }
     else {
         [self.peripheralManager startAdvertising:@{CBAdvertisementDataServiceUUIDsKey : @[service.UUID]}];
     }
 }
 
 - (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(NSError *)error {
-    if (error)
+    if (error) {
+        [self notifyPeripheralStop];
         [Log error:[NSString stringWithFormat:@"Не удалось предоставить общий доступ к сервису: %@", error.localizedDescription]];
+    }
     else {
         [Log success:@"К данным предоставлен общий доступ. Можно подключаться"];
     }
@@ -130,6 +135,11 @@
 - (void)peripheralManagerIsReadyToUpdateSubscribers:(CBPeripheralManager *)peripheral {
     [self sendData];
 }
+
+/*
+    Дробление картинки на порции и координирование отправки.
+    Взято отсюда: http://stackoverflow.com/questions/18476335/sending-image-file-over-bluetooth-4-0-le
+ */
 
 - (void)sendData {
     static BOOL sendingEOM = NO;
@@ -160,7 +170,7 @@
         int amountToSend = _imageData.length - _sendDataIndex;
 
         // Can't be longer than 20 bytes
-        if (amountToSend > NOTIFY_MTU) amountToSend = NOTIFY_MTU;
+        if (amountToSend > MTU) amountToSend = MTU;
 
         // Copy out the data we want
         NSData *chunk = [_imageData subdataWithRange:NSMakeRange((NSUInteger) _sendDataIndex, (NSUInteger) amountToSend)];
@@ -169,6 +179,7 @@
 
         // If it didn't work, drop out and wait for the callback
         if (!didSend) {
+            [Log error:@"Не удалось отправить порцию данных"];
             return;
         }
 
