@@ -132,6 +132,14 @@
     }
 }
 
+- (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didUnsubscribeFromCharacteristic:(CBCharacteristic *)characteristic {
+    if ([characteristic.UUID.UUIDString isEqualToString:kAppCharacteristicImage]) {
+        // Если передача прервалась по инициативе клиента - обрываем передачу,
+        // передвигая маркер начала блока данных в конец
+        _sendDataIndex = _imageData.length;
+    }
+}
+
 - (void)peripheralManagerIsReadyToUpdateSubscribers:(CBPeripheralManager *)peripheral {
     [self sendData];
 }

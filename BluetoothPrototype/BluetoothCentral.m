@@ -65,7 +65,8 @@
         return;
     }
     [_centralManager stopScan];
-    [Log message:@"Сканирование устройств прекращено"];
+    [self cleanup];
+    [Log message:@"Получение даных отменено"];
 }
 
 - (void)cleanup {
@@ -75,25 +76,24 @@
         for (CBService *service in _currentPeripheral.services) {
             if (service.characteristics != nil) {
                 for (CBCharacteristic *characteristic in service.characteristics) {
-                    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:kAppCharacteristicImage]]) {
-                        if (characteristic.isNotifying) {
-                            [_currentPeripheral setNotifyValue:NO forCharacteristic:characteristic];
-                            return;
-                        }
+                    if (characteristic.isNotifying) {
+                        [_currentPeripheral setNotifyValue:NO forCharacteristic:characteristic];
+                        return;
                     }
                 }
             }
         }
     }
 
-    [_centralManager cancelPeripheralConnection:_currentPeripheral];
+    if (_currentPeripheral)
+        [_centralManager cancelPeripheralConnection:_currentPeripheral];
 }
 
 - (void)centralManager:(CBCentralManager *)central
  didDiscoverPeripheral:(CBPeripheral *)peripheral
      advertisementData:(NSDictionary *)advertisementData
                   RSSI:(NSNumber *)RSSI {
-    [self stopScanForDevices];
+    [_centralManager stopScan];
     _currentPeripheral = peripheral;
     [_centralManager connectPeripheral:peripheral options:nil]; //Таймаута нет! Будет долбиться до победного. Нужно отменять запросы явно
 }
@@ -129,7 +129,8 @@
     }
     else {
         for (CBCharacteristic *characteristic in service.characteristics) {
-            [peripheral setNotifyValue:YES forCharacteristic:characteristic];
+            if ([characteristic.UUID.UUIDString isEqualToString:kAppCharacteristicImage])
+                [peripheral setNotifyValue:YES forCharacteristic:characteristic];
         }
     }
 }
@@ -144,8 +145,7 @@
     // Have we got everything we need?
     if ([stringFromData isEqualToString:@"EOM"]) {
         [Log success:[NSString stringWithFormat:@"Получено значение характеристики %@. Размер %d байт", characteristic.UUID.UUIDString, _imageData.length]];
-        [peripheral setNotifyValue:NO forCharacteristic:characteristic];
-        [_centralManager cancelPeripheralConnection:peripheral];
+        [self cleanup];
     }
     NSData *chunk = characteristic.value;
     [_imageData appendData:chunk];
