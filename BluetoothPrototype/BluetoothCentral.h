@@ -6,9 +6,22 @@
 #import <Foundation/Foundation.h>
 
 
+@protocol BluetoothCentralDelegate
+
+- (void)showImage:(UIImage *)image message:(NSString *)message;
+
+- (void)updateLoadingStatus:(NSInteger)currentStatus maxValue:(NSInteger)maxValue;
+
+@end
+
+
+
 @interface BluetoothCentral : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate>
 
 - (void)startScanForDevices;
 
 - (void)stopScanForDevices;
+
+@property id <BluetoothCentralDelegate> delegate;
+
 @end

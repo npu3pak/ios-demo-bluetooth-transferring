@@ -14,6 +14,7 @@
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.43237911039999999" green="0.65953470680000004" blue="0.76022401149999996" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="b72-Ag-DvJ" kind="relationship" relationship="viewControllers" id="Amg-w1-nni"/>
@@ -249,26 +250,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="drP-K0-jOU">
-                                <rect key="frame" x="97" y="286" width="126" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Получить данные">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="startScan:" destination="n56-4I-M1H" eventType="touchUpInside" id="Cbe-tK-l2i"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Bc-5P-sVu">
-                                <rect key="frame" x="57" y="336" width="207" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Отменить получение данных">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="stopScan:" destination="n56-4I-M1H" eventType="touchUpInside" id="ikA-jk-h1d"/>
-                                </connections>
-                            </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hjT-8O-etq">
                                 <rect key="frame" x="251" y="95" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -284,18 +265,113 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QIJ-z9-VNx">
+                                <rect key="frame" x="37" y="191" width="247" height="98"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="drP-K0-jOU">
+                                        <rect key="frame" x="60" y="48" width="126" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Получить данные">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="startScan:" destination="n56-4I-M1H" eventType="touchUpInside" id="Cbe-tK-l2i"/>
+                                        </connections>
+                                    </button>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="sTK-f1-Kyp">
+                                        <rect key="frame" x="20" y="20" width="207" height="3"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="trackTintColor" red="0.86224489795918369" green="0.86224489795918369" blue="0.86224489795918369" alpha="1" colorSpace="calibratedRGB"/>
+                                    </progressView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Bc-5P-sVu">
+                                        <rect key="frame" x="20" y="48" width="207" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Отменить получение данных">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="stopScan:" destination="n56-4I-M1H" eventType="touchUpInside" id="ikA-jk-h1d"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="247" id="6sQ-oG-7Me"/>
+                                    <constraint firstAttribute="height" constant="98" id="KyM-i9-FZz"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.3469587053571429" green="0.3469587053571429" blue="0.3469587053571429" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="QIJ-z9-VNx" secondAttribute="centerX" constant="-0.5" id="pqm-xT-iDk"/>
+                            <constraint firstAttribute="centerY" secondItem="QIJ-z9-VNx" secondAttribute="centerY" id="t3i-0o-ypv"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Передача" id="r5G-1Q-QeC"/>
+                    <navigationItem key="navigationItem" title="Передача" id="r5G-1Q-QeC">
+                        <barButtonItem key="backBarButtonItem" title="Назад" id="Hnc-ZH-LWm"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="loadingProgressView" destination="sTK-f1-Kyp" id="tL3-JQ-6xA"/>
                         <outlet property="peripheralStateSwitch" destination="hjT-8O-etq" id="Csa-wh-XHd"/>
+                        <outlet property="startLoadingButton" destination="drP-K0-jOU" id="2tT-ek-3fj"/>
+                        <outlet property="stopLoadingButton" destination="8Bc-5P-sVu" id="tVN-cF-nAC"/>
+                        <segue destination="eoo-lJ-sJQ" kind="push" identifier="showTransferResult" id="QrT-Gk-EaK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cix-vn-Izm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1604" y="-690"/>
+        </scene>
+        <!--Result View Controller-->
+        <scene sceneID="TcT-3T-IeQ">
+            <objects>
+                <viewController id="eoo-lJ-sJQ" customClass="ResultViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WZY-kH-giX"/>
+                        <viewControllerLayoutGuide type="bottom" id="ipL-Ap-oPS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RFf-ux-SUg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XES-WL-FEN">
+                                <rect key="frame" x="20" y="70" width="280" height="324"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="DUj-1A-ob1">
+                                <rect key="frame" x="20" y="414" width="280" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="51" id="OyW-Qc-rvk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DUj-1A-ob1" firstAttribute="top" secondItem="XES-WL-FEN" secondAttribute="bottom" constant="20" id="2tM-ht-3Jw"/>
+                            <constraint firstItem="XES-WL-FEN" firstAttribute="top" secondItem="RFf-ux-SUg" secondAttribute="top" constant="70" id="QUw-KC-av5"/>
+                            <constraint firstAttribute="trailing" secondItem="DUj-1A-ob1" secondAttribute="trailing" constant="20" id="TVm-Ns-Wnp"/>
+                            <constraint firstItem="XES-WL-FEN" firstAttribute="leading" secondItem="RFf-ux-SUg" secondAttribute="leading" constant="20" id="bDS-tf-pn9"/>
+                            <constraint firstAttribute="trailing" secondItem="XES-WL-FEN" secondAttribute="trailing" constant="20" id="d3Y-Ne-c5B"/>
+                            <constraint firstItem="ipL-Ap-oPS" firstAttribute="top" secondItem="DUj-1A-ob1" secondAttribute="bottom" constant="15" id="dUQ-da-tXf"/>
+                            <constraint firstItem="DUj-1A-ob1" firstAttribute="leading" secondItem="RFf-ux-SUg" secondAttribute="leading" constant="20" id="e3K-cW-FHl"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="sxK-VS-dm9"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="imageView" destination="XES-WL-FEN" id="VzI-dY-ndA"/>
+                        <outlet property="label" destination="DUj-1A-ob1" id="c3C-q2-cY4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g4c-7c-gbr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2043" y="-693"/>
         </scene>
     </scenes>
     <resources>

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BluetoothCentral.h"
 
-@interface TransferViewController : UIViewController
+@interface TransferViewController : UIViewController <BluetoothCentralDelegate>
 
 
 @end

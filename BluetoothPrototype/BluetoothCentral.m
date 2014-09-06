@@ -14,6 +14,8 @@
     CBPeripheral *_currentPeripheral;
     NSMutableData *_imageData;
     NSNumber *_imageDataSize;
+
+    NSString *_message;
 }
 
 - (id)init {
@@ -55,6 +57,7 @@
         [Log error:@"Bluetooth недоступен. Поиск устройств отменен"];
         return;
     }
+    [_centralManager stopScan];
     [self cleanup];
     [Log message:@"Начинается сканирование устройств"];
     [_centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:kAppServiceUUID]] options:nil];
@@ -73,6 +76,7 @@
 - (void)cleanup {
     _imageDataSize = nil;
     _imageData = [NSMutableData new];
+    _message = nil;
     // See if we are subscribed to a characteristic on the peripheral
     if (_currentPeripheral.services != nil) {
         for (CBService *service in _currentPeripheral.services) {
@@ -119,7 +123,7 @@
         [Log error:[NSString stringWithFormat:@"Ошибка подключения к сервису: %@", error.localizedDescription]];
     }
     else {
-        [peripheral discoverCharacteristics:@[[CBUUID UUIDWithString:kAppCharacteristicImage],[CBUUID UUIDWithString:kAppCharacteristicMessage]]
+        [peripheral discoverCharacteristics:@[[CBUUID UUIDWithString:kAppCharacteristicImage], [CBUUID UUIDWithString:kAppCharacteristicMessage]]
                                  forService:peripheral.services[0]];
     }
 }
@@ -156,21 +160,24 @@
 
 - (void)imageCharacteristicUpdated:(CBCharacteristic *)characteristic {
     if (!_imageDataSize) {
-            NSString *size = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-            [Log message:[NSString stringWithFormat:@"Начинается передача картинки размером %@ байт", size]];
-            _imageDataSize = @(size.intValue);
-        } else {
-            [_imageData appendData:characteristic.value];
-            if (_imageData.length >= _imageDataSize.intValue) {
-                [Log success:[NSString stringWithFormat:@"Получена картинка %@. Размер %d байт", characteristic.UUID.UUIDString, _imageData.length]];
-                [self cleanup];
-            }
+        NSString *size = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        [Log message:[NSString stringWithFormat:@"Начинается передача картинки размером %@ байт", size]];
+        _imageDataSize = @(size.intValue);
+    } else {
+        [_imageData appendData:characteristic.value];
+        [self.delegate updateLoadingStatus:_imageData.length maxValue:_imageDataSize.intValue];
+        if (_imageData.length >= _imageDataSize.intValue) {
+            [Log success:[NSString stringWithFormat:@"Получена картинка %@. Размер %d байт", characteristic.UUID.UUIDString, _imageData.length]];
+            UIImage *image = [[UIImage alloc] initWithData:_imageData];
+            [self.delegate showImage:image message:_message.copy];
+            [self cleanup];
         }
+    }
 }
 
 - (void)messageCharacteristicUpdated:(CBCharacteristic *)characteristic {
-    NSString *message = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-    [Log success:[NSString stringWithFormat:@"Получен текст: %@", message]];
+    _message = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+    [Log success:[NSString stringWithFormat:@"Получен текст: %@", _message]];
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
