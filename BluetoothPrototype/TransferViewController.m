@@ -17,6 +17,7 @@
 @property(weak, nonatomic) IBOutlet UIProgressView *loadingProgressView;
 @property(weak, nonatomic) IBOutlet UIButton *startLoadingButton;
 @property(weak, nonatomic) IBOutlet UIButton *stopLoadingButton;
+@property(weak, nonatomic) IBOutlet UIButton *initiateTransferButton;
 
 @end
 
@@ -42,6 +43,7 @@
     _initiatorCentral = [[BluetoothInitiateConnectionCentral alloc] init];
 
     [self showLoadButton];
+    self.initiateTransferButton.hidden = YES;
 }
 
 - (void)showLoadButton {
@@ -51,18 +53,24 @@
 }
 
 - (IBAction)peripheralSwitchStateChanged:(UISwitch *)sender {
-    if (sender.on)
+    if (sender.on) {
         [_peripheral setUp];
-    else
+        self.initiateTransferButton.hidden = NO;
+    }
+    else {
         [_peripheral shutDown];
+        self.initiateTransferButton.hidden = YES;
+    }
 }
 
 - (void)onPeripheralDisabled {
     self.peripheralStateSwitch.on = NO;
+    self.initiateTransferButton.hidden = YES;
 }
 
 - (void)onPeripheralEnabled {
     self.peripheralStateSwitch.on = YES;
+    self.initiateTransferButton.hidden = NO;
 }
 
 - (IBAction)startScan:(id)sender {
