@@ -25,6 +25,7 @@ typedef enum {
 @implementation BluetoothPeripheral {
     CBMutableCharacteristic *_messageCharacteristic;
     CBMutableCharacteristic *_imageCharacteristic;
+    CBMutableCharacteristic *_initiateConnectionCharacteristic;
     NSData *_imageData;
     int _imagePacketPosition;
     SendingState _imageSendingState;
@@ -106,15 +107,19 @@ typedef enum {
     _imageSendingState = IDLE;
     _imageData = UIImageJPEGRepresentation([Settings testImage], 1.0);
     _messageCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:kAppCharacteristicMessage]
-                                                             properties:CBCharacteristicPropertyRead
-                                                                  value:[[Settings testMessage] dataUsingEncoding:NSUTF8StringEncoding]
-                                                            permissions:CBAttributePermissionsReadable];
+                                                                properties:CBCharacteristicPropertyRead
+                                                                     value:[[Settings testMessage] dataUsingEncoding:NSUTF8StringEncoding]
+                                                               permissions:CBAttributePermissionsReadable];
     _imageCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:kAppCharacteristicImage]
                                                               properties:CBCharacteristicPropertyNotify
                                                                    value:nil
                                                              permissions:CBAttributePermissionsReadable];
+    _initiateConnectionCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:kAppCharacteristicInitiateConnection]
+                                                                           properties:CBCharacteristicPropertyWriteWithoutResponse
+                                                                                value:nil
+                                                                          permissions:CBAttributePermissionsWriteable];
     CBMutableService *_peripheralService = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:kAppServiceUUID] primary:YES];
-    _peripheralService.characteristics = @[_imageCharacteristic, _messageCharacteristic];
+    _peripheralService.characteristics = @[_imageCharacteristic, _messageCharacteristic, _initiateConnectionCharacteristic];
     [self.peripheralManager addService:_peripheralService];
 }
 
@@ -200,6 +205,10 @@ typedef enum {
         }
         [self sendData];
     }
+}
+
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests {
+    [self.delegate transferRequestInitiated];
 }
 
 @end

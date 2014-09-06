@@ -4,12 +4,12 @@
 //
 
 #import <CoreBluetooth/CoreBluetooth.h>
-#import "BluetoothCentral.h"
+#import "BluetoothDataTransferCentral.h"
 #import "Log.h"
 #import "Constants.h"
 
 
-@implementation BluetoothCentral {
+@implementation BluetoothDataTransferCentral {
     CBCentralManager *_centralManager;
     CBPeripheral *_currentPeripheral;
     NSMutableData *_imageData;

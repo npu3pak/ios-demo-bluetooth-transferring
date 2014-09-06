@@ -16,7 +16,7 @@
 
 
 
-@interface BluetoothCentral : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate>
+@interface BluetoothDataTransferCentral : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate>
 
 - (void)startScanForDevices;
 

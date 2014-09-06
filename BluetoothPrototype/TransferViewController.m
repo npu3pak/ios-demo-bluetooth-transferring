@@ -8,8 +8,8 @@
 
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "TransferViewController.h"
-#import "BluetoothPeripheral.h"
 #import "ResultViewController.h"
+#import "BluetoothInitiateConnectionCentral.h"
 
 @interface TransferViewController ()
 
@@ -21,7 +21,8 @@
 @end
 
 @implementation TransferViewController {
-    BluetoothCentral *_central;
+    BluetoothDataTransferCentral *_central;
+    BluetoothInitiateConnectionCentral *_initiatorCentral;
     BluetoothPeripheral *_peripheral;
 
     UIImage *_resultImage;
@@ -33,8 +34,12 @@
     _peripheral = [[BluetoothPeripheral alloc] initWithSender:self
                                     peripheralStartedCallback:@selector(onPeripheralEnabled)
                                     peripheralStoppedCallback:@selector(onPeripheralDisabled)];
-    _central = [[BluetoothCentral alloc] init];
+    _peripheral.delegate = self;
+
+    _central = [[BluetoothDataTransferCentral alloc] init];
     _central.delegate = self;
+
+    _initiatorCentral = [[BluetoothInitiateConnectionCentral alloc] init];
 
     [self showLoadButton];
 }
@@ -97,5 +102,16 @@
         resultViewController.image = _resultImage;
     }
 }
+
+- (IBAction)initiateTransfer:(id)sender {
+    [_initiatorCentral initiateConnection];
+}
+
+- (void)transferRequestInitiated {
+    [self showLoadButton];
+    [self stopScan:nil];
+    [self startScan:nil];
+}
+
 
 @end
