@@ -23,10 +23,11 @@ typedef enum {
 } SendingState;
 
 @implementation BluetoothPeripheral {
-    NSData *_imageData;
-    int _packetPosition;
+    CBMutableCharacteristic *_messageCharacteristic;
     CBMutableCharacteristic *_imageCharacteristic;
-    SendingState _sendingState;
+    NSData *_imageData;
+    int _imagePacketPosition;
+    SendingState _imageSendingState;
     NSInteger _mtu;
 }
 
@@ -37,7 +38,7 @@ typedef enum {
         self.sender = sender;
         self.peripheralStartedCallback = peripheralStartedCallback;
         self.peripheralStoppedCallback = peripheralStoppedCallback;
-        _sendingState = IDLE;
+        _imageSendingState = IDLE;
     }
 
     return self;
@@ -89,7 +90,7 @@ typedef enum {
         [Log error:@"Bluetooth недоступен. Нечего отменять. Отправка данных и так не выполнялась"];
         return;
     }
-    _sendingState = IDLE;
+    _imageSendingState = IDLE;
     [self.peripheralManager stopAdvertising];
     [self.peripheralManager removeAllServices];
     [Log message:@"Раздача данных отключена. Устройство больше не доступно для обнаружения"];
@@ -102,14 +103,18 @@ typedef enum {
         return;
     }
     _mtu = Settings.mtu;
-    _sendingState = IDLE;
+    _imageSendingState = IDLE;
     _imageData = UIImageJPEGRepresentation([Settings testImage], 1.0);
+    _messageCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:kAppCharacteristicMessage]
+                                                             properties:CBCharacteristicPropertyRead
+                                                                  value:[[Settings testMessage] dataUsingEncoding:NSUTF8StringEncoding]
+                                                            permissions:CBAttributePermissionsReadable];
     _imageCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:kAppCharacteristicImage]
                                                               properties:CBCharacteristicPropertyNotify
                                                                    value:nil
                                                              permissions:CBAttributePermissionsReadable];
     CBMutableService *_peripheralService = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:kAppServiceUUID] primary:YES];
-    _peripheralService.characteristics = @[_imageCharacteristic];
+    _peripheralService.characteristics = @[_imageCharacteristic, _messageCharacteristic];
     [self.peripheralManager addService:_peripheralService];
 }
 
@@ -135,16 +140,16 @@ typedef enum {
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic {
     if ([characteristic.UUID.UUIDString isEqualToString:kAppCharacteristicImage]) {
-        _sendingState = SIZE_SENDING;
-        _packetPosition = 0;
+        _imageSendingState = SIZE_SENDING;
+        _imagePacketPosition = 0;
         [self sendData];
     }
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didUnsubscribeFromCharacteristic:(CBCharacteristic *)characteristic {
     if ([characteristic.UUID.UUIDString isEqualToString:kAppCharacteristicImage]) {
-        _sendingState = IDLE;
-        _packetPosition = 0;
+        _imageSendingState = IDLE;
+        _imagePacketPosition = 0;
     }
 }
 
@@ -158,11 +163,11 @@ typedef enum {
  */
 
 - (void)sendData {
-    if (_sendingState == SIZE_SENDING) {
+    if (_imageSendingState == SIZE_SENDING) {
         [self sendSizeDate];
     }
 
-    else if (_sendingState == DATA_SENDING) {
+    else if (_imageSendingState == DATA_SENDING) {
         [self sendImageData];
     }
 }
@@ -171,27 +176,27 @@ typedef enum {
     NSData *data = [@(_imageData.length).stringValue dataUsingEncoding:NSUTF8StringEncoding];
     BOOL success = [self.peripheralManager updateValue:data forCharacteristic:_imageCharacteristic onSubscribedCentrals:nil];
     if (success) {
-        _sendingState = DATA_SENDING;
+        _imageSendingState = DATA_SENDING;
         [self sendImageData];
     }
 }
 
 - (void)sendImageData {
-    int packetSize = _imageData.length - _packetPosition;
+    int packetSize = _imageData.length - _imagePacketPosition;
 
     if (packetSize > _mtu) {
         packetSize = _mtu;
     }
 
-    NSData *packet = [_imageData subdataWithRange:NSMakeRange((NSUInteger) _packetPosition, (NSUInteger) packetSize)];
+    NSData *packet = [_imageData subdataWithRange:NSMakeRange((NSUInteger) _imagePacketPosition, (NSUInteger) packetSize)];
     BOOL success = [self.peripheralManager updateValue:packet forCharacteristic:_imageCharacteristic onSubscribedCentrals:nil];
 
     if (success) {
-        _packetPosition += packetSize;
-        if (_packetPosition >= _imageData.length) {
+        _imagePacketPosition += packetSize;
+        if (_imagePacketPosition >= _imageData.length) {
             [Log success:[NSString stringWithFormat:@"Передача завершена. Передано %d байт", _imageData.length]];
-            _sendingState = IDLE;
-            _packetPosition = 0;
+            _imageSendingState = IDLE;
+            _imagePacketPosition = 0;
         }
         [self sendData];
     }

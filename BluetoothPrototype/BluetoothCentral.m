@@ -119,7 +119,7 @@
         [Log error:[NSString stringWithFormat:@"Ошибка подключения к сервису: %@", error.localizedDescription]];
     }
     else {
-        [peripheral discoverCharacteristics:@[[CBUUID UUIDWithString:kAppCharacteristicImage]]
+        [peripheral discoverCharacteristics:@[[CBUUID UUIDWithString:kAppCharacteristicImage],[CBUUID UUIDWithString:kAppCharacteristicMessage]]
                                  forService:peripheral.services[0]];
     }
 }
@@ -133,6 +133,9 @@
         for (CBCharacteristic *characteristic in service.characteristics) {
             if ([characteristic.UUID.UUIDString isEqualToString:kAppCharacteristicImage])
                 [peripheral setNotifyValue:YES forCharacteristic:characteristic];
+            else if ([characteristic.UUID.UUIDString isEqualToString:kAppCharacteristicMessage]) {
+                [peripheral readValueForCharacteristic:characteristic];
+            }
         }
     }
 }
@@ -143,17 +146,31 @@
         [Log error:[NSString stringWithFormat:@"Ошибка %@", error.localizedDescription]];
         return;
     }
-    if (!_imageDataSize) {
-        NSString *size = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-        [Log message:[NSString stringWithFormat:@"Начинается передача значения размером %@ байт", size]];
-        _imageDataSize = @(size.intValue);
-    } else {
-        [_imageData appendData:characteristic.value];
-        if (_imageData.length >= _imageDataSize.intValue) {
-            [Log success:[NSString stringWithFormat:@"Получено значение характеристики %@. Размер %d байт", characteristic.UUID.UUIDString, _imageData.length]];
-            [self cleanup];
-        }
+    if ([characteristic.UUID.UUIDString isEqualToString:kAppCharacteristicImage]) {
+        [self imageCharacteristicUpdated:characteristic];
     }
+    if ([characteristic.UUID.UUIDString isEqualToString:kAppCharacteristicMessage]) {
+        [self messageCharacteristicUpdated:characteristic];
+    }
+}
+
+- (void)imageCharacteristicUpdated:(CBCharacteristic *)characteristic {
+    if (!_imageDataSize) {
+            NSString *size = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+            [Log message:[NSString stringWithFormat:@"Начинается передача картинки размером %@ байт", size]];
+            _imageDataSize = @(size.intValue);
+        } else {
+            [_imageData appendData:characteristic.value];
+            if (_imageData.length >= _imageDataSize.intValue) {
+                [Log success:[NSString stringWithFormat:@"Получена картинка %@. Размер %d байт", characteristic.UUID.UUIDString, _imageData.length]];
+                [self cleanup];
+            }
+        }
+}
+
+- (void)messageCharacteristicUpdated:(CBCharacteristic *)characteristic {
+    NSString *message = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+    [Log success:[NSString stringWithFormat:@"Получен текст: %@", message]];
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
