@@ -13,6 +13,7 @@
     CBCentralManager *_centralManager;
     CBPeripheral *_currentPeripheral;
     NSMutableData *_imageData;
+    NSNumber *_imageDataSize;
 }
 
 - (id)init {
@@ -50,11 +51,11 @@
 #pragma mark Сканирование
 
 - (void)startScanForDevices {
-    _imageData = [NSMutableData new];
     if (_centralManager.state != CBCentralManagerStatePoweredOn) {
         [Log error:@"Bluetooth недоступен. Поиск устройств отменен"];
         return;
     }
+    [self cleanup];
     [Log message:@"Начинается сканирование устройств"];
     [_centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:kAppServiceUUID]] options:nil];
 }
@@ -70,6 +71,7 @@
 }
 
 - (void)cleanup {
+    _imageDataSize = nil;
     _imageData = [NSMutableData new];
     // See if we are subscribed to a characteristic on the peripheral
     if (_currentPeripheral.services != nil) {
@@ -141,14 +143,17 @@
         [Log error:[NSString stringWithFormat:@"Ошибка %@", error.localizedDescription]];
         return;
     }
-    NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-    // Have we got everything we need?
-    if ([stringFromData isEqualToString:@"EOM"]) {
-        [Log success:[NSString stringWithFormat:@"Получено значение характеристики %@. Размер %d байт", characteristic.UUID.UUIDString, _imageData.length]];
-        [self cleanup];
+    if (!_imageDataSize) {
+        NSString *size = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        [Log message:[NSString stringWithFormat:@"Начинается передача значения размером %@ байт", size]];
+        _imageDataSize = @(size.intValue);
+    } else {
+        [_imageData appendData:characteristic.value];
+        if (_imageData.length >= _imageDataSize.intValue) {
+            [Log success:[NSString stringWithFormat:@"Получено значение характеристики %@. Размер %d байт", characteristic.UUID.UUIDString, _imageData.length]];
+            [self cleanup];
+        }
     }
-    NSData *chunk = characteristic.value;
-    [_imageData appendData:chunk];
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
@@ -158,9 +163,9 @@
         return;
     }
     if (characteristic.isNotifying) {
-        [Log message:[NSString stringWithFormat:@"Характеристика %@ доступна", characteristic]];
+        [Log message:[NSString stringWithFormat:@"Подписываемся на %@", characteristic.UUID.UUIDString]];
     } else {
-        [Log message:[NSString stringWithFormat:@"Характеристика %@ больше не доступна", characteristic]];
+        [Log message:[NSString stringWithFormat:@"Отменяем подписку на %@", characteristic.UUID.UUIDString]];
         [_centralManager cancelPeripheralConnection:peripheral];
     }
 }

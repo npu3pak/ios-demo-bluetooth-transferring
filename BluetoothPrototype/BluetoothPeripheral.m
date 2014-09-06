@@ -18,13 +18,16 @@
 
 @end
 
-//TODO В настройки
-#define MTU 120
+typedef enum {
+    IDLE, SIZE_SENDING, DATA_SENDING
+} SendingState;
 
 @implementation BluetoothPeripheral {
     NSData *_imageData;
-    int _sendDataIndex;
+    int _packetPosition;
     CBMutableCharacteristic *_imageCharacteristic;
+    SendingState _sendingState;
+    NSInteger _mtu;
 }
 
 - (instancetype)initWithSender:(id)sender peripheralStartedCallback:(SEL)peripheralStartedCallback peripheralStoppedCallback:(SEL)peripheralStoppedCallback {
@@ -34,6 +37,7 @@
         self.sender = sender;
         self.peripheralStartedCallback = peripheralStartedCallback;
         self.peripheralStoppedCallback = peripheralStoppedCallback;
+        _sendingState = IDLE;
     }
 
     return self;
@@ -85,8 +89,10 @@
         [Log error:@"Bluetooth недоступен. Нечего отменять. Отправка данных и так не выполнялась"];
         return;
     }
+    _sendingState = IDLE;
     [self.peripheralManager stopAdvertising];
-    [Log success:@"Раздача данных отключена. Устройство больше не доступно для обнаружения"];
+    [self.peripheralManager removeAllServices];
+    [Log message:@"Раздача данных отключена. Устройство больше не доступно для обнаружения"];
 }
 
 - (void)setUp {
@@ -95,6 +101,8 @@
         [self notifyPeripheralStop];
         return;
     }
+    _mtu = Settings.mtu;
+    _sendingState = IDLE;
     _imageData = UIImageJPEGRepresentation([Settings testImage], 1.0);
     _imageCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:kAppCharacteristicImage]
                                                               properties:CBCharacteristicPropertyNotify
@@ -121,22 +129,22 @@
         [Log error:[NSString stringWithFormat:@"Не удалось предоставить общий доступ к сервису: %@", error.localizedDescription]];
     }
     else {
-        [Log success:@"К данным предоставлен общий доступ. Можно подключаться"];
+        [Log success:[NSString stringWithFormat:@"К данным предоставлен общий доступ. Можно подключаться. Размер пакета %d байт", _mtu]];
     }
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic {
     if ([characteristic.UUID.UUIDString isEqualToString:kAppCharacteristicImage]) {
-        _sendDataIndex = 0;
+        _sendingState = SIZE_SENDING;
+        _packetPosition = 0;
         [self sendData];
     }
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didUnsubscribeFromCharacteristic:(CBCharacteristic *)characteristic {
     if ([characteristic.UUID.UUIDString isEqualToString:kAppCharacteristicImage]) {
-        // Если передача прервалась по инициативе клиента - обрываем передачу,
-        // передвигая маркер начала блока данных в конец
-        _sendDataIndex = _imageData.length;
+        _sendingState = IDLE;
+        _packetPosition = 0;
     }
 }
 
@@ -146,70 +154,47 @@
 
 /*
     Дробление картинки на порции и координирование отправки.
-    Взято отсюда: http://stackoverflow.com/questions/18476335/sending-image-file-over-bluetooth-4-0-le
+    Идея взята отсюда: http://stackoverflow.com/questions/18476335/sending-image-file-over-bluetooth-4-0-le
  */
 
 - (void)sendData {
-    static BOOL sendingEOM = NO;
-    // end of message?
-    if (sendingEOM) {
-        BOOL didSend = [self.peripheralManager updateValue:[@"EOM" dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:_imageCharacteristic onSubscribedCentrals:nil];
-
-        if (didSend) {
-            // It did, so mark it as sent
-            sendingEOM = NO;
-        }
-        // didn't send, so we'll exit and wait for peripheralManagerIsReadyToUpdateSubscribers to call sendData again
-        return;
+    if (_sendingState == SIZE_SENDING) {
+        [self sendSizeDate];
     }
 
-    // We're sending data
-    // Is there any left to send?
-    if (_sendDataIndex >= _imageData.length) {
-        // No data left.  Do nothing
-        return;
-    }
-
-    // There's data left, so send until the callback fails, or we're done.
-    BOOL didSend = YES;
-
-    while (didSend) {
-        // Work out how big it should be
-        int amountToSend = _imageData.length - _sendDataIndex;
-
-        // Can't be longer than 20 bytes
-        if (amountToSend > MTU) amountToSend = MTU;
-
-        // Copy out the data we want
-        NSData *chunk = [_imageData subdataWithRange:NSMakeRange((NSUInteger) _sendDataIndex, (NSUInteger) amountToSend)];
-
-        didSend = [self.peripheralManager updateValue:chunk forCharacteristic:_imageCharacteristic onSubscribedCentrals:nil];
-
-        // If it didn't work, drop out and wait for the callback
-        if (!didSend) {
-            return;
-        }
-
-        // It did send, so update our index
-        _sendDataIndex += amountToSend;
-
-        // Was it the last one?
-        if (_sendDataIndex >= _imageData.length) {
-
-            // Set this so if the send fails, we'll send it next time
-            sendingEOM = YES;
-
-            BOOL eomSent = [self.peripheralManager updateValue:[@"EOM" dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:_imageCharacteristic onSubscribedCentrals:nil];
-
-            if (eomSent) {
-                // It sent, we're all done
-                sendingEOM = NO;
-                [Log success:[NSString stringWithFormat:@"Передача завершена. Передано %d байт", _imageData.length]];
-            }
-            return;
-        }
+    else if (_sendingState == DATA_SENDING) {
+        [self sendImageData];
     }
 }
 
+- (void)sendSizeDate {
+    NSData *data = [@(_imageData.length).stringValue dataUsingEncoding:NSUTF8StringEncoding];
+    BOOL success = [self.peripheralManager updateValue:data forCharacteristic:_imageCharacteristic onSubscribedCentrals:nil];
+    if (success) {
+        _sendingState = DATA_SENDING;
+        [self sendImageData];
+    }
+}
+
+- (void)sendImageData {
+    int packetSize = _imageData.length - _packetPosition;
+
+    if (packetSize > _mtu) {
+        packetSize = _mtu;
+    }
+
+    NSData *packet = [_imageData subdataWithRange:NSMakeRange((NSUInteger) _packetPosition, (NSUInteger) packetSize)];
+    BOOL success = [self.peripheralManager updateValue:packet forCharacteristic:_imageCharacteristic onSubscribedCentrals:nil];
+
+    if (success) {
+        _packetPosition += packetSize;
+        if (_packetPosition >= _imageData.length) {
+            [Log success:[NSString stringWithFormat:@"Передача завершена. Передано %d байт", _imageData.length]];
+            _sendingState = IDLE;
+            _packetPosition = 0;
+        }
+        [self sendData];
+    }
+}
 
 @end

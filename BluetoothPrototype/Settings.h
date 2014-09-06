@@ -18,9 +18,10 @@
 
 + (NSUInteger)testImageSize;
 
-+ (BOOL)sendingEnabled;
-
-+ (void)setSendingEnabled:(BOOL)sendingEnabled;
-
 + (NSUInteger)defaultTestImageSize;
+
++ (void)setMtu:(NSInteger)mtu;
+
++ (NSInteger)mtu;
+
 @end

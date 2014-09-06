@@ -5,10 +5,11 @@
 
 #import "Settings.h"
 #import "Log.h"
+#import "Constants.h"
 
 
+static NSString *const kUserDefaultsMtu = @"Mtu";
 static NSString *const kUserDefaultsKeyMessage = @"TestMessage";
-static NSString *const kUserDefaultsKeyIsSendingEnabled = @"SendingEnabled";
 
 @implementation Settings
 
@@ -42,6 +43,17 @@ static NSString *const kUserDefaultsKeyIsSendingEnabled = @"SendingEnabled";
     return UIImageJPEGRepresentation([self testImage], 1.0).length;
 }
 
++ (NSInteger)mtu {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger mtu = [userDefaults integerForKey:kUserDefaultsMtu];
+    return mtu ? mtu : kDefaultMtu;
+}
+
++ (void)setMtu:(NSInteger)mtu {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setInteger:mtu forKey:kUserDefaultsMtu];
+}
+
 + (NSString *)testMessage {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *testMessage = [userDefaults stringForKey:kUserDefaultsKeyMessage];
@@ -53,17 +65,6 @@ static NSString *const kUserDefaultsKeyIsSendingEnabled = @"SendingEnabled";
     [userDefaults setObject:message forKey:kUserDefaultsKeyMessage];
     [userDefaults synchronize];
     [Log message:[NSString stringWithFormat:@"Установлено новое тестовое сообщение: %@", message]];
-}
-
-+ (BOOL)sendingEnabled {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    return [userDefaults boolForKey:kUserDefaultsKeyIsSendingEnabled];
-}
-
-+ (void)setSendingEnabled:(BOOL)sendingEnabled {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:sendingEnabled forKey:kUserDefaultsKeyIsSendingEnabled];
-    [userDefaults synchronize];
 }
 
 @end

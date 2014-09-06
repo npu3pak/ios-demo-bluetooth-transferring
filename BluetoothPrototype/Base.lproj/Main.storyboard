@@ -90,6 +90,34 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="MTU" id="28F-7P-7mY">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="q6a-fZ-qmZ">
+                                        <rect key="frame" x="0.0" y="339" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q6a-fZ-qmZ" id="8YP-BP-38h">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" minimumValue="20" maximumValue="130" translatesAutoresizingMaskIntoConstraints="NO" id="90P-JW-vQu">
+                                                    <rect key="frame" x="206" y="7" width="94" height="29"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <connections>
+                                                        <action selector="mtuStepperValueChanged:" destination="6SN-lP-NmM" eventType="valueChanged" id="GqY-j6-YkC"/>
+                                                    </connections>
+                                                </stepper>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YkA-KK-HQF">
+                                                    <rect key="frame" x="20" y="11" width="173" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="6SN-lP-NmM" id="2q2-YE-QLG"/>
@@ -99,6 +127,8 @@
                     <navigationItem key="navigationItem" title="Настройки" id="Jxb-Kg-ui3"/>
                     <connections>
                         <outlet property="messageTextField" destination="3bl-1f-eRC" id="Neg-rX-aVe"/>
+                        <outlet property="mtuLabel" destination="YkA-KK-HQF" id="YHd-p9-W4Q"/>
+                        <outlet property="mtuStepper" destination="90P-JW-vQu" id="eTJ-ID-S9c"/>
                         <outlet property="testImageSizeLabel" destination="u2S-5z-5d9" id="FqX-89-Wso"/>
                         <outlet property="testImageView" destination="ROI-ky-WKQ" id="PTd-o7-SVC"/>
                     </connections>
