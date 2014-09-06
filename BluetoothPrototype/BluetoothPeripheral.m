@@ -105,7 +105,7 @@ typedef enum {
     }
     _mtu = Settings.mtu;
     _imageSendingState = IDLE;
-    _imageData = UIImageJPEGRepresentation([Settings testImage], 1.0);
+    _imageData = UIImageJPEGRepresentation([Settings testImage], kImageQuality);
     _messageCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:kAppCharacteristicMessage]
                                                                 properties:CBCharacteristicPropertyRead
                                                                      value:[[Settings testMessage] dataUsingEncoding:NSUTF8StringEncoding]

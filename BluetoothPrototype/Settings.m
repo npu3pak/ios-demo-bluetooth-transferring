@@ -19,7 +19,7 @@ static NSString *const kUserDefaultsKeyMessage = @"TestMessage";
 }
 
 + (void)setTestImage:(UIImage *)image {
-    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+    NSData *imageData = UIImageJPEGRepresentation(image, kImageQuality);
     BOOL imageWriteSuccess = [imageData writeToFile:self.testImagePath atomically:YES];
     if (imageWriteSuccess)
         [Log message:@"Тестовая картинка была обновлена"];
@@ -40,7 +40,7 @@ static NSString *const kUserDefaultsKeyMessage = @"TestMessage";
 }
 
 + (NSUInteger)defaultTestImageSize {
-    return UIImageJPEGRepresentation([self testImage], 1.0).length;
+    return UIImageJPEGRepresentation([self testImage], kImageQuality).length;
 }
 
 + (NSInteger)mtu {
@@ -57,7 +57,7 @@ static NSString *const kUserDefaultsKeyMessage = @"TestMessage";
 + (NSString *)testMessage {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *testMessage = [userDefaults stringForKey:kUserDefaultsKeyMessage];
-    return testMessage ? testMessage : @"Привет!";
+    return testMessage.length ? testMessage : @"";
 }
 
 + (void)setTestMessage:(NSString *)message {

@@ -6,6 +6,8 @@
 #import <Foundation/Foundation.h>
 
 
+static const float kImageQuality = 0.6;
+
 @interface Settings : NSObject
 
 + (UIImage *)testImage;

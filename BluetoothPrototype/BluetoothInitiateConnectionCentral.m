@@ -104,8 +104,10 @@
     }
     else {
         for (CBCharacteristic *characteristic in service.characteristics) {
-            if ([characteristic.UUID.UUIDString isEqualToString:kAppCharacteristicInitiateConnection])
+            if ([characteristic.UUID.UUIDString isEqualToString:kAppCharacteristicInitiateConnection]) {
+                [Log success:@"Запрос на начало передачи отправлен"];
                 [peripheral writeValue:NSData.new forCharacteristic:characteristic type:CBCharacteristicWriteWithoutResponse];
+            }
         }
     }
 }

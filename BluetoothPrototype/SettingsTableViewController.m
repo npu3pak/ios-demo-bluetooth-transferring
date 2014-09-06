@@ -8,6 +8,8 @@
 
 #import "SettingsTableViewController.h"
 #import "Settings.h"
+#import "UIImage+Resize.h"
+#import "Log.h"
 
 @interface SettingsTableViewController ()
 @property(weak, nonatomic) IBOutlet UITextField *messageTextField;
@@ -64,9 +66,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 1) {
+    if (indexPath.section == 1 && indexPath.row == 0)
         [self selectImage];
-    }
+    if (indexPath.section == 1 && indexPath.row == 1)
+        [self takePhoto];
 }
 
 - (void)selectImage {
@@ -77,8 +80,20 @@
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 
+- (void)takePhoto {
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePickerController.delegate = self;
+    [self presentViewController:imagePickerController animated:YES completion:nil];
+}
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    [Log message:[NSString stringWithFormat:@"Старый размер %fx%f", image.size.width, image.size.height]];
+    if (image.size.width > 640 || image.size.height > 480)
+        image = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(640, 480) interpolationQuality:kCGInterpolationDefault];
+    [Log message:[NSString stringWithFormat:@"Новый размер %fx%f", image.size.width, image.size.height]];
     [Settings setTestImage:image];
     [self dismissViewControllerAnimated:YES completion:nil];
 }

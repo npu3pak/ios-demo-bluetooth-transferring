@@ -29,6 +29,7 @@
 		40F1ABD919A998E900BAB441 /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABD819A998E900BAB441 /* LogViewController.m */; };
 		40F1ABDC19A9990B00BAB441 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABDB19A9990B00BAB441 /* SettingsTableViewController.m */; };
 		40F1ABE319A999E400BAB441 /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1ABE219A999E400BAB441 /* Log.m */; };
+		8095D60C26C584797D739E0E /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 8095D1C80B8350184D870D6D /* UIImage+Resize.m */; };
 		8095D63E4E03C071C2614475 /* ResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8095D95D8815F130BA29C50B /* ResultViewController.m */; };
 		8095DA62305B75296E4A5FA1 /* BluetoothDataTransferCentral.m in Sources */ = {isa = PBXBuildFile; fileRef = 8095D9D78613D507D1C954FF /* BluetoothDataTransferCentral.m */; };
 		8095DB24DF22B534DC948D1B /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8095D2B86809C2055C145729 /* Settings.m */; };
@@ -82,8 +83,10 @@
 		40F1ABDB19A9990B00BAB441 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		40F1ABE119A999E400BAB441 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		40F1ABE219A999E400BAB441 /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
+		8095D1C80B8350184D870D6D /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		8095D2B86809C2055C145729 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		8095D4A6E84EDC5B82784F9F /* BluetoothDataTransferCentral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothDataTransferCentral.h; sourceTree = "<group>"; };
+		8095D4E2F7A6871CE950B6DB /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		8095D6BBECA81F636995DF1A /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		8095D910EFBBC03F49B25AF1 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		8095D95D8815F130BA29C50B /* ResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultViewController.m; sourceTree = "<group>"; };
@@ -252,6 +255,8 @@
 				8095D2B86809C2055C145729 /* Settings.m */,
 				8095D6BBECA81F636995DF1A /* Settings.h */,
 				8095D910EFBBC03F49B25AF1 /* Constants.h */,
+				8095D4E2F7A6871CE950B6DB /* UIImage+Resize.h */,
+				8095D1C80B8350184D870D6D /* UIImage+Resize.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -385,6 +390,7 @@
 				148FA9FE3481CB310C187A78 /* TransferResult.m in Sources */,
 				8095D63E4E03C071C2614475 /* ResultViewController.m in Sources */,
 				8095DBA9483502262473B7D0 /* BluetoothInitiateConnectionCentral.m in Sources */,
+				8095D60C26C584797D739E0E /* UIImage+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
