@@ -28,6 +28,10 @@
 	<string>1.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Приложению требуется доступ к Bluetooth</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Приложению требуется доступ к галерее</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>
