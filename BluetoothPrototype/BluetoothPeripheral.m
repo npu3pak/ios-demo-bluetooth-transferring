@@ -27,6 +27,7 @@ typedef enum {
     CBMutableCharacteristic *_imageCharacteristic;
     CBMutableCharacteristic *_initiateConnectionCharacteristic;
     NSData *_imageData;
+    NSString *_message;
     int _imagePacketPosition;
     SendingState _imageSendingState;
     NSInteger _mtu;
@@ -103,9 +104,11 @@ typedef enum {
         [self notifyPeripheralStop];
         return;
     }
+    [Log message:@"Инициализация данных для отправки и создание сервиса Bluetooth"];
     _mtu = Settings.mtu;
     _imageSendingState = IDLE;
     _imageData = UIImageJPEGRepresentation([Settings testImage], kImageQuality);
+    _message = [Settings testMessage];
     _messageCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:kAppCharacteristicMessage]
                                                                 properties:CBCharacteristicPropertyRead
                                                                      value:[[Settings testMessage] dataUsingEncoding:NSUTF8StringEncoding]
@@ -126,9 +129,10 @@ typedef enum {
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didAddService:(CBService *)service error:(NSError *)error {
     if (error) {
         [self notifyPeripheralStop];
-        [Log error:[NSString stringWithFormat:@"Не удалось зарегистрировать сервис: %@", error.localizedDescription]];
+        [Log error:[NSString stringWithFormat:@"Не удалось создать сервис: %@", error.localizedDescription]];
     }
     else {
+        [Log message:@"Сервис Bluetooth создан. Предоставление доступа к сервису"];
         [self.peripheralManager startAdvertising:@{CBAdvertisementDataServiceUUIDsKey : @[service.UUID]}];
     }
 }
@@ -136,15 +140,16 @@ typedef enum {
 - (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(NSError *)error {
     if (error) {
         [self notifyPeripheralStop];
-        [Log error:[NSString stringWithFormat:@"Не удалось предоставить общий доступ к сервису: %@", error.localizedDescription]];
+        [Log error:[NSString stringWithFormat:@"Не удалось предоставить доступ к сервису: %@", error.localizedDescription]];
     }
     else {
-        [Log success:[NSString stringWithFormat:@"К данным предоставлен общий доступ. Можно подключаться. Размер пакета %d байт", _mtu]];
+        [Log success:[NSString stringWithFormat:@"К сервису Bluetooth предоставлен доступ. Можно подключаться. Размер пакета %d байт. Размер картинки  %d. Текст: %@", _mtu, _imageData.length, _message]];
     }
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic {
     if ([characteristic.UUID.UUIDString isEqualToString:kAppCharacteristicImage]) {
+        [Log message:@"Зарегистрирована подписка на характеристику. Получен запрос на загрузку картинки"];
         _imageSendingState = SIZE_SENDING;
         _imagePacketPosition = 0;
         [self sendData];
@@ -153,8 +158,10 @@ typedef enum {
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didUnsubscribeFromCharacteristic:(CBCharacteristic *)characteristic {
     if ([characteristic.UUID.UUIDString isEqualToString:kAppCharacteristicImage]) {
+        [Log message:@"Отменена подписка на характеристику. Запрос на загрузку картинки отменен или обработан"];
         _imageSendingState = IDLE;
         _imagePacketPosition = 0;
+        [self.delegate uploadingCancelled];
     }
 }
 
@@ -169,6 +176,7 @@ typedef enum {
 
 - (void)sendData {
     if (_imageSendingState == SIZE_SENDING) {
+        [Log message:@"Отправка информации о размере картинки"];
         [self sendSizeDate];
     }
 
@@ -181,7 +189,9 @@ typedef enum {
     NSData *data = [@(_imageData.length).stringValue dataUsingEncoding:NSUTF8StringEncoding];
     BOOL success = [self.peripheralManager updateValue:data forCharacteristic:_imageCharacteristic onSubscribedCentrals:nil];
     if (success) {
+        [Log message:@"Информация о размере картинки отправлена"];
         _imageSendingState = DATA_SENDING;
+        [Log message:@"Отправка картинки"];
         [self sendImageData];
     }
 }
@@ -198,6 +208,7 @@ typedef enum {
 
     if (success) {
         _imagePacketPosition += packetSize;
+        [self.delegate updateUploadingStatus:_imagePacketPosition maxValue:_imageData.length];
         if (_imagePacketPosition >= _imageData.length) {
             [Log success:[NSString stringWithFormat:@"Передача завершена. Передано %d байт", _imageData.length]];
             _imageSendingState = IDLE;
@@ -208,7 +219,8 @@ typedef enum {
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests {
-    [self.delegate transferRequestInitiated];
+    [Log message:@"Другое устройство попросило загрузить с него данные"];
+    [self.delegate dataLoadingInitiated];
 }
 
 @end

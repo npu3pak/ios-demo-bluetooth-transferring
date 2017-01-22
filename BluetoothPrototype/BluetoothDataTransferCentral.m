@@ -165,7 +165,7 @@
         _imageDataSize = @(size.intValue);
     } else {
         [_imageData appendData:characteristic.value];
-        [self.delegate updateLoadingStatus:_imageData.length maxValue:_imageDataSize.intValue];
+        [self.delegate updateDownloadingStatus:_imageData.length maxValue:_imageDataSize.intValue];
         if (_imageData.length >= _imageDataSize.intValue) {
             [Log success:[NSString stringWithFormat:@"Получена картинка %@. Размер %d байт", characteristic.UUID.UUIDString, _imageData.length]];
             UIImage *image = [[UIImage alloc] initWithData:_imageData];

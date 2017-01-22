@@ -14,7 +14,8 @@
 @interface TransferViewController ()
 
 @property(weak, nonatomic) IBOutlet UISwitch *peripheralStateSwitch;
-@property(weak, nonatomic) IBOutlet UIProgressView *loadingProgressView;
+@property(weak, nonatomic) IBOutlet UIProgressView *downloadingProgressView;
+@property(weak, nonatomic) IBOutlet UIProgressView *uploadingProgressView;
 @property(weak, nonatomic) IBOutlet UIButton *startLoadingButton;
 @property(weak, nonatomic) IBOutlet UIButton *stopLoadingButton;
 @property(weak, nonatomic) IBOutlet UIButton *initiateTransferButton;
@@ -44,12 +45,13 @@
 
     [self showLoadButton];
     self.initiateTransferButton.hidden = YES;
+    self.uploadingProgressView.hidden = YES;
 }
 
 - (void)showLoadButton {
     self.startLoadingButton.hidden = NO;
     self.stopLoadingButton.hidden = YES;
-    self.loadingProgressView.hidden = YES;
+    self.downloadingProgressView.hidden = YES;
 }
 
 - (IBAction)peripheralSwitchStateChanged:(UISwitch *)sender {
@@ -87,12 +89,12 @@
 - (void)showCancelButton {
     self.startLoadingButton.hidden = NO;
     self.stopLoadingButton.hidden = YES;
-    self.loadingProgressView.hidden = YES;
+    self.downloadingProgressView.hidden = YES;
 }
 
-- (void)updateLoadingStatus:(NSInteger)currentStatus maxValue:(NSInteger)maxValue {
-    self.loadingProgressView.hidden = NO;
-    self.loadingProgressView.progress = (float) currentStatus / (float) maxValue;
+- (void)updateDownloadingStatus:(NSInteger)currentStatus maxValue:(NSInteger)maxValue {
+    self.downloadingProgressView.hidden = NO;
+    self.downloadingProgressView.progress = (float) currentStatus / (float) maxValue;
 }
 
 - (void)showImage:(UIImage *)image message:(NSString *)message {
@@ -115,10 +117,21 @@
     [_initiatorCentral initiateConnection];
 }
 
-- (void)transferRequestInitiated {
+- (void)dataLoadingInitiated {
     [self showLoadButton];
     [self stopScan:nil];
     [self startScan:nil];
+}
+
+- (void)uploadingCancelled {
+    self.uploadingProgressView.hidden = YES;
+}
+
+- (void)updateUploadingStatus:(NSInteger)currentStatus maxValue:(NSInteger)maxValue {
+    self.uploadingProgressView.hidden = NO;
+    self.uploadingProgressView.progress = (float) currentStatus / (float) maxValue;
+    if(currentStatus >= maxValue)
+        self.uploadingProgressView.hidden = YES;
 }
 
 

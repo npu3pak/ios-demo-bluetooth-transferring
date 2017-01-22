@@ -10,7 +10,7 @@
 
 - (void)showImage:(UIImage *)image message:(NSString *)message;
 
-- (void)updateLoadingStatus:(NSInteger)currentStatus maxValue:(NSInteger)maxValue;
+- (void)updateDownloadingStatus:(NSInteger)currentStatus maxValue:(NSInteger)maxValue;
 
 @end
 

@@ -7,8 +7,11 @@
 
 @protocol BluetoothPeripheralDelegate
 
-- (void)transferRequestInitiated;
+- (void)dataLoadingInitiated;
 
+- (void)uploadingCancelled;
+
+- (void)updateUploadingStatus:(NSInteger)currentStatus maxValue:(NSInteger)maxValue;
 @end
 
 @interface BluetoothPeripheral : NSObject <CBPeripheralManagerDelegate>

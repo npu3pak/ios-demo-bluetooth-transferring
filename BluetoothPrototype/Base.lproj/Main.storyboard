@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -332,25 +332,37 @@
                                     <action selector="initiateTransfer:" destination="n56-4I-M1H" eventType="touchUpInside" id="XnZ-uN-2z6"/>
                                 </connections>
                             </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="D6D-uE-58w">
+                                <rect key="frame" x="57" y="310" width="207" height="3"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="Qj3-rQ-KIO"/>
+                                </constraints>
+                                <color key="trackTintColor" red="0.86224489800000004" green="0.86224489800000004" blue="0.86224489800000004" alpha="1" colorSpace="calibratedRGB"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.3469587053571429" green="0.3469587053571429" blue="0.3469587053571429" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="D6D-uE-58w" secondAttribute="trailing" constant="56" id="BSF-iZ-Wbt"/>
                             <constraint firstAttribute="centerX" secondItem="die-Qf-Eb7" secondAttribute="centerX" constant="-0.5" id="Vzf-KN-Dv0"/>
                             <constraint firstItem="die-Qf-Eb7" firstAttribute="top" secondItem="QIJ-z9-VNx" secondAttribute="bottom" constant="37" id="dP4-cZ-0i2"/>
+                            <constraint firstItem="die-Qf-Eb7" firstAttribute="top" secondItem="D6D-uE-58w" secondAttribute="bottom" constant="14" id="kCU-U0-v33"/>
                             <constraint firstAttribute="centerX" secondItem="QIJ-z9-VNx" secondAttribute="centerX" constant="-0.5" id="pqm-xT-iDk"/>
                             <constraint firstAttribute="centerY" secondItem="QIJ-z9-VNx" secondAttribute="centerY" id="t3i-0o-ypv"/>
+                            <constraint firstItem="D6D-uE-58w" firstAttribute="leading" secondItem="pjy-DS-lM3" secondAttribute="leading" constant="57" id="zOh-ND-fPQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Передача" id="r5G-1Q-QeC">
                         <barButtonItem key="backBarButtonItem" title="Назад" id="Hnc-ZH-LWm"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="downloadingProgressView" destination="sTK-f1-Kyp" id="tL3-JQ-6xA"/>
                         <outlet property="initiateTransferButton" destination="die-Qf-Eb7" id="4wm-Mc-TD8"/>
-                        <outlet property="loadingProgressView" destination="sTK-f1-Kyp" id="tL3-JQ-6xA"/>
                         <outlet property="peripheralStateSwitch" destination="hjT-8O-etq" id="Csa-wh-XHd"/>
                         <outlet property="startLoadingButton" destination="drP-K0-jOU" id="2tT-ek-3fj"/>
                         <outlet property="stopLoadingButton" destination="8Bc-5P-sVu" id="tVN-cF-nAC"/>
+                        <outlet property="uploadingProgressView" destination="D6D-uE-58w" id="mtV-3w-4eR"/>
                         <segue destination="eoo-lJ-sJQ" kind="push" identifier="showTransferResult" id="QrT-Gk-EaK"/>
                     </connections>
                 </viewController>
