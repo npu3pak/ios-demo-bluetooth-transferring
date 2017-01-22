@@ -12,6 +12,7 @@
 		148FAAAB93ACFC39835C9FC6 /* TransferTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 148FA90F69B6447E823FA7EA /* TransferTaskManager.m */; };
 		148FAB3C830EB7CFD711F53D /* TransferExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 148FA5839BF7B058C199F425 /* TransferExecutor.m */; };
 		148FAC09086B41237CEBD943 /* TransferTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 148FA4BFE78E8BA6647B118C /* TransferTask.m */; };
+		40DE95EC1E35358300FBCD81 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 40DE95EB1E35358300FBCD81 /* HelloWorld.png */; };
 		40EFCEF819AE428600B7A5B6 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40EFCEF719AE428600B7A5B6 /* CoreBluetooth.framework */; };
 		40F1AB9519A991A600BAB441 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F1AB9419A991A600BAB441 /* Foundation.framework */; };
 		40F1AB9719A991A600BAB441 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F1AB9619A991A600BAB441 /* CoreGraphics.framework */; };
@@ -34,7 +35,6 @@
 		8095DA62305B75296E4A5FA1 /* BluetoothDataTransferCentral.m in Sources */ = {isa = PBXBuildFile; fileRef = 8095D9D78613D507D1C954FF /* BluetoothDataTransferCentral.m */; };
 		8095DB24DF22B534DC948D1B /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8095D2B86809C2055C145729 /* Settings.m */; };
 		8095DBA9483502262473B7D0 /* BluetoothInitiateConnectionCentral.m in Sources */ = {isa = PBXBuildFile; fileRef = 8095D96757A51A70A6E84235 /* BluetoothInitiateConnectionCentral.m */; };
-		840BD22119B187D100F31C99 /* HelloWorld.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 840BD22019B187D100F31C99 /* HelloWorld.jpg */; };
 		DB963F7F19AF4E8000257528 /* TransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB963F7E19AF4E8000257528 /* TransferViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +59,7 @@
 		148FAC2421E06DE6A050B491 /* BluetoothPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothPeripheral.m; sourceTree = "<group>"; };
 		148FAE23B901AE6562520AC2 /* TransferTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferTask.h; sourceTree = "<group>"; };
 		148FAF3AB3CC8006640C73D1 /* TransferResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferResult.h; sourceTree = "<group>"; };
+		40DE95EB1E35358300FBCD81 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
 		40EFCEF719AE428600B7A5B6 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		40F1AB9119A991A600BAB441 /* BluetoothPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluetoothPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40F1AB9419A991A600BAB441 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -94,7 +95,6 @@
 		8095D9D78613D507D1C954FF /* BluetoothDataTransferCentral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothDataTransferCentral.m; sourceTree = "<group>"; };
 		8095DA4B9E096A325D3EB136 /* ResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultViewController.h; sourceTree = "<group>"; };
 		8095DC853DC1F5F6730B16A1 /* BluetoothInitiateConnectionCentral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothInitiateConnectionCentral.h; sourceTree = "<group>"; };
-		840BD22019B187D100F31C99 /* HelloWorld.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HelloWorld.jpg; sourceTree = "<group>"; };
 		DB963F7D19AF4E8000257528 /* TransferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferViewController.h; sourceTree = "<group>"; };
 		DB963F7E19AF4E8000257528 /* TransferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -240,7 +240,7 @@
 		40F1ABCE19A991C700BAB441 /* Res */ = {
 			isa = PBXGroup;
 			children = (
-				840BD22019B187D100F31C99 /* HelloWorld.jpg */,
+				40DE95EB1E35358300FBCD81 /* HelloWorld.png */,
 				40F1ABD519A993D800BAB441 /* Images.xcassets */,
 				40F1ABA619A991A600BAB441 /* Main.storyboard */,
 			);
@@ -354,7 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40F1AB9F19A991A600BAB441 /* InfoPlist.strings in Resources */,
-				840BD22119B187D100F31C99 /* HelloWorld.jpg in Resources */,
+				40DE95EC1E35358300FBCD81 /* HelloWorld.png in Resources */,
 				40F1ABD619A993D800BAB441 /* Images.xcassets in Resources */,
 				40F1ABA819A991A600BAB441 /* Main.storyboard in Resources */,
 			);

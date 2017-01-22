@@ -15,7 +15,7 @@ static NSString *const kUserDefaultsKeyMessage = @"TestMessage";
 
 + (UIImage *)testImage {
     UIImage *image = [UIImage imageWithContentsOfFile:self.testImagePath];
-    return image ? image : [UIImage imageNamed:@"HelloWorld.jpg"];
+    return image ? image : [UIImage imageNamed:@"HelloWorld.png"];
 }
 
 + (void)setTestImage:(UIImage *)image {
